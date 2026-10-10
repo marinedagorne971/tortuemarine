@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tortue Marine — Alquiler de alojamientos, Le Moule, Guadalupe</title>
+<meta name="description" content="Alquiler de tres bungalows con aire acondicionado y una casa a 100 m de la playa de L'Autre Bord, Le Moule, Guadalupe. Terraza y jardín privados.">
+<link rel="canonical" href="https://tortuemarine.com/es.html">
+<link rel="alternate" hreflang="fr" href="https://tortuemarine.com/">
+<link rel="alternate" hreflang="en" href="https://tortuemarine.com/en.html">
+<link rel="alternate" hreflang="es" href="https://tortuemarine.com/es.html">
+<link rel="alternate" hreflang="x-default" href="https://tortuemarine.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --color-bg: #f3f2f2;
+  --color-surface: #eae9e9;
+  --color-text: #201f1d;
+  --color-divider: rgba(32, 31, 29, 0.16);
+
+  --color-neutral-100: #f8f4f4;
+  --color-neutral-700: #605d5d;
+  --color-neutral-900: #2d2b2b;
+
+  --color-accent-100: #fff3e4;
+  --color-accent-300: #facb8d;
+  --color-accent-400: #e1ad66;
+  --color-accent-700: #7d5411;
+  --color-accent-800: #5a3b0a;
+
+  --font-heading: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Lora", Georgia, serif;
+  --radius-md: 4px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-wrap: pretty;
+}
+
+html { scroll-behavior: smooth; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  margin: 0;
+}
+
+p { margin: 0; }
+
+a { color: var(--color-accent-700); text-underline-offset: 3px; }
+a:hover { color: var(--color-accent-800); }
+
+input, textarea, button, select { font: inherit; }
+
+.hr {
+  height: 1px;
+  border: 0;
+  background: var(--color-divider);
+}
+
+/* Buttons: outlined, never filled — matches the Classical system */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 14.5px;
+  line-height: 1.2;
+  padding: 11px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-primary { color: var(--color-accent-700); border-color: var(--color-accent-700); }
+.btn-primary:hover { background: rgba(125, 84, 17, 0.1); color: var(--color-accent-800); }
+.btn-secondary { color: var(--color-text); border-color: var(--color-divider); }
+.btn-secondary:hover { background: rgba(32, 31, 29, 0.06); }
+.btn-ghost { color: var(--color-accent-700); border-color: transparent; padding-inline: 6px; }
+.btn-ghost:hover { background: rgba(125, 84, 17, 0.08); }
+.btn-block { width: 100%; }
+
+.tag {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  padding: 4px 10px;
+  border-radius: 3px;
+}
+.tag-outline { border: 1px solid var(--color-accent-700); color: var(--color-accent-700); }
+
+/* Image placeholders — replace the background-image with a real photo when available */
+.plate {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--color-neutral-100);
+  border: 1px solid var(--color-divider);
+}
+.plate-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  color: var(--color-neutral-700);
+  background-image: repeating-linear-gradient(135deg, #eeece4 0px, #eeece4 10px, #e4e1d6 10px, #e4e1d6 20px);
+}
+.plate-hero .plate-placeholder {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.82);
+  background-image: linear-gradient(180deg, rgba(45, 43, 43, 0.55), rgba(45, 43, 43, 0.78)),
+    repeating-linear-gradient(135deg, #4a4645 0px, #4a4645 12px, #3c3938 12px, #3c3938 24px);
+}
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 13.5px; font-weight: 600; color: rgba(32, 31, 29, 0.7); }
+.input {
+  font-size: 15px;
+  color: var(--color-text);
+  padding: 10px 12px;
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+}
+.input:hover { border-color: rgba(32, 31, 29, 0.4); }
+.input:focus-visible { outline: 2px solid var(--color-accent-700); outline-offset: 0; border-color: var(--color-accent-700); }
+
+.nav-link { color: inherit; text-decoration: none; }
+.nav-link:hover { color: var(--color-accent-700); }
+
+@media (max-width: 800px) {
+  .stack-mobile { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 480px) {
+  h1 { font-size: 32px !important; }
+  h2 { font-size: 26px !important; }
+}
+
+/* Galerie photos */
+.gal-btn { display: block; padding: 0; margin: 0; border: 1px solid var(--color-divider); border-radius: var(--radius-md); background: var(--color-neutral-100); overflow: hidden; cursor: zoom-in; }
+.gal-btn img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.gal-btn:hover { border-color: var(--color-accent-700); }
+.gal-btn:focus-visible { outline: 2px solid var(--color-accent-700); outline-offset: 2px; }
+.gal-main { width: 100%; height: 220px; }
+.gal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+.gal-grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .gal-grid-4 .gal-thumb { height: 62px; }
+    .gal-thumb { height: 74px; }
+.gal-pair { grid-template-columns: 1fr 1fr; margin-top: 0; }
+.gal-pair .gal-btn { height: 190px; }
+.lightbox { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; background: rgba(20, 19, 18, 0.92); padding: 24px; }
+.lightbox.open { display: flex; }
+.lightbox figure { margin: 0; max-width: min(1100px, 100%); max-height: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.lightbox img { max-width: 100%; max-height: calc(100vh - 110px); object-fit: contain; border-radius: var(--radius-md); }
+.lightbox figcaption { color: #f8f4f4; font-size: 14px; text-align: center; }
+.lb-btn { position: absolute; background: transparent; color: #f8f4f4; border: 1px solid rgba(248, 244, 244, 0.5); border-radius: var(--radius-md); width: 44px; height: 44px; font-size: 22px; line-height: 1; cursor: pointer; }
+.lb-btn:hover { background: rgba(248, 244, 244, 0.12); }
+.lb-close { top: 16px; right: 16px; }
+.lb-prev { left: 16px; top: 50%; transform: translateY(-50%); }
+.lb-next { right: 16px; top: 50%; transform: translateY(-50%); }
+@media (max-width: 480px) { .lb-prev { left: 6px; } .lb-next { right: 6px; } }
+
+    .tm-toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: #201f1d; color: #fff; font-size: 14px; line-height: 1.4; padding: 12px 18px; border-radius: 8px; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 1000; max-width: calc(100vw - 32px); text-align: center; }
+    .tm-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+.lang { display: flex; gap: 4px; align-items: center; font-size: 13px; letter-spacing: 0.06em; }
+.lang a { color: var(--color-text); text-decoration: none; padding: 4px 7px; border-radius: 4px; opacity: .65; }
+.lang a:hover { opacity: 1; background: rgba(32,31,29,0.06); }
+.lang a[aria-current="true"] { opacity: 1; font-weight: 700; border-bottom: 2px solid var(--color-accent-700); border-radius: 0; }
+</style>
+</head>
+<body>
+<div style="max-width: 100%; overflow-x: hidden;">
+
+  <header style="display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; padding: 22px clamp(20px, 5vw, 64px); border-bottom: 1px solid var(--color-divider); background: var(--color-bg); position: sticky; top: 0; z-index: 20;">
+    <div style="margin-right: auto;">
+      <div style="font-family: var(--font-heading); font-weight: 700; font-size: 24px; line-height: 1.1; letter-spacing: 0.01em;">Tortue Marine</div>
+      <div style="font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent-700); margin-top: 5px;">Alquiler de alojamientos — Le Moule, Guadalupe</div>
+    </div>
+    <nav style="display: flex; gap: 22px; align-items: center; flex-wrap: wrap; font-size: 14px;">
+      <a class="nav-link" href="#logements">Nuestros alojamientos</a>
+      <a class="nav-link" href="#emplacement">La ubicación</a>
+      <a class="nav-link" href="#tarifs">Disponibilidad</a>
+      <a href="#contact" class="btn btn-primary">Escríbanos</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Idioma"><a href="index.html" hreflang="fr" lang="fr">FR</a><a href="en.html" hreflang="en" lang="en">EN</a><a href="es.html" hreflang="es" lang="es" aria-current="true">ES</a></div>
+  </header>
+
+  <section>
+    <div class="plate plate-hero" style="position: relative; width: 100%; height: clamp(420px, 68vh, 620px); border-radius: 0; border-left: 0; border-right: 0; border-top: 0;">
+      <img src="plage-autre-bord.webp" alt="Playa de L'Autre Bord en Le Moule: arena blanca, cocoteros y mar turquesa" width="1920" height="1080" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%;">
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(45, 43, 43, 0.15) 0%, rgba(45, 43, 43, 0.35) 45%, rgba(45, 43, 43, 0.78) 100%);"></div>
+      <div style="position: absolute; inset: 0; display: grid; align-items: end; justify-items: center; text-align: center; padding: clamp(20px, 5vw, 64px);">
+        <div>
+          <span style="display: block; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-300);">L'Autre Bord · Le Moule · Grande-Terre</span>
+          <h1 style="font-family: var(--font-heading); font-weight: 500; font-size: clamp(36px, 6vw, 68px); line-height: 1.1; letter-spacing: -0.01em; margin: 20px auto 0; max-width: 22ch; color: #f8f4f4;">
+            <span style="display: block;">A 100 m del mar,</span>
+            <span style="display: block; color: var(--color-accent-300);">tres bungalows y una casa a la sombra de los cocoteros</span>
+          </h1>
+          <div style="width: 84px; height: 1px; background: var(--color-accent-400); margin: 26px auto 0;"></div>
+        </div>
+      </div>
+    </div>
+    <div style="padding: clamp(36px, 6vw, 72px) clamp(20px, 5vw, 64px); max-width: 1120px; margin: 0 auto; width: 100%;">
+      <p style="font-size: 17px; line-height: 1.65; max-width: 56ch; margin: 0; color: rgba(32,31,29,0.8);">
+        Tres bungalows y una casa, amueblados, cada uno con su terraza y su jardín privado, a pocos pasos de la playa de L'Autre Bord y del puerto pesquero. La calma junto al mar, con las tiendas del centro a dos minutos.
+      </p>
+      <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px;">
+        <a href="#logements" class="btn btn-primary">Descubrir los alojamientos</a>
+        <a href="#contact" class="btn btn-secondary">Consultar mis fechas</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--color-accent-100); border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: clamp(30px, 4vw, 48px) clamp(20px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 28px;">
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7d5411" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 2px;"><path d="M2 18c1.8 0 1.8-1.3 3.6-1.3S7.4 18 9.2 18s1.8-1.3 3.6-1.3S14.6 18 16.4 18s1.8-1.3 3.6-1.3"></path><path d="M2 13c1.8 0 1.8-1.3 3.6-1.3S7.4 13 9.2 13s1.8-1.3 3.6-1.3S14.6 13 16.4 13s1.8-1.3 3.6-1.3"></path><path d="M2 8c1.8 0 1.8-1.3 3.6-1.3S7.4 8 9.2 8s1.8-1.3 3.6-1.3S14.6 8 16.4 8s1.8-1.3 3.6-1.3"></path></svg>
+        <div>
+          <h4 style="font-size: 17px; margin: 0 0 4px;">Frente al mar</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(32,31,29,0.78);">La playa de L'Autre Bord a 100 m, a pie.</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7d5411" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 2px;"><path d="M12 3v18"></path><path d="M5 7l14 10"></path><path d="M19 7L5 17"></path><circle cx="12" cy="12" r="2.4"></circle></svg>
+        <div>
+          <h4 style="font-size: 17px; margin: 0 0 4px;">Aire acondicionado</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(32,31,29,0.78);">Bungalows y dormitorios de la casa con aire acondicionado.</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7d5411" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 2px;"><path d="M12 21V11"></path><path d="M12 11c0-4 2.5-6.5 6-7 .4 3.8-1.8 7-6 7z"></path><path d="M12 14c0-3.4-2-5.6-5.2-6-.4 3.2 1.5 6 5.2 6z"></path><path d="M6 21h12"></path></svg>
+        <div>
+          <h4 style="font-size: 17px; margin: 0 0 4px;">Jardín privado</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(32,31,29,0.78);">Terraza y jardín reservados para cada alojamiento.</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7d5411" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 2px;"><path d="M4 9h16l-1.2 10.2a1.5 1.5 0 0 1-1.5 1.3H6.7a1.5 1.5 0 0 1-1.5-1.3z"></path><path d="M9 9V6.5a3 3 0 0 1 6 0V9"></path></svg>
+        <div>
+          <h4 style="font-size: 17px; margin: 0 0 4px;">Todo cerca</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(32,31,29,0.78);">Centro, tiendas y puerto pesquero a un paso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="logements" style="background: var(--color-neutral-900); border-top: 1px solid var(--color-divider);">
+  <div style="max-width: 1120px; margin: 0 auto; padding: clamp(48px, 7vw, 88px) clamp(20px, 5vw, 64px);">
+    <span style="display: block; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-accent-300);">Nuestros alojamientos</span>
+    <h2 style="font-family: var(--font-heading); font-weight: 500; font-size: clamp(30px, 4vw, 44px); line-height: 1.12; margin: 14px 0 0; max-width: 30ch; color: #f8f4f4;">Tres bungalows y una casa a 100 m de la playa</h2>
+    <p style="font-size: 16px; line-height: 1.7; max-width: 58ch; margin: 18px 0 0; color: rgba(248,244,244,0.78);">Cada alojamiento es independiente, está amueblado y equipado para ofrecerle una estancia de ensueño en plena calma, con todas las comodidades necesarias.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: clamp(24px, 3vw, 40px); margin-top: clamp(32px, 4vw, 52px);">
+
+      <article style="display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 16px; background: var(--color-bg);">
+        <div class="gallery" data-gallery="b1">
+          <button type="button" class="gal-btn gal-main" data-full="b1-terrasse_2.webp" data-alt="Terraza cubierta y jardín privado del Cocotier" aria-label="Ampliar foto: Terraza">
+            <img src="b1-terrasse_2.webp" alt="Terraza cubierta y jardín privado del Cocotier" width="1400" height="1054">
+          </button>
+          <div class="gal-grid">
+            <button type="button" class="gal-btn gal-thumb" data-full="b1-chambre_2.webp" data-alt="Dormitorio con aire acondicionado, cama con dosel de madera y paredes azules" aria-label="Ampliar foto: Dormitorio">
+              <img src="b1-chambre_2.webp" alt="Dormitorio con aire acondicionado, cama con dosel de madera y paredes azules" width="1400" height="1054" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b1-sejour_2.webp" data-alt="Salón con mesa, sillas de teca y televisión, bajo vigas vistas" aria-label="Ampliar foto: Salón">
+              <img src="b1-sejour_2.webp" alt="Salón con mesa, sillas de teca y televisión, bajo vigas vistas" width="1054" height="1400" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b1-cuisine_2.webp" data-alt="Cocina equipada con placas, horno, campana y fregadero" aria-label="Ampliar foto: Cocina">
+              <img src="b1-cuisine_2.webp" alt="Cocina equipada con placas, horno, campana y fregadero" width="1054" height="1400" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b1-douche_2.webp" data-alt="Cuarto de baño con ducha a ras de suelo e inodoro" aria-label="Ampliar foto: Ducha">
+              <img src="b1-douche_2.webp" alt="Cuarto de baño con ducha a ras de suelo e inodoro" width="1047" height="1400" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b1-lavabo_2.webp" data-alt="Cuarto de baño con mueble de lavabo y espejo" aria-label="Ampliar foto: Lavabo">
+              <img src="b1-lavabo_2.webp" alt="Cuarto de baño con mueble de lavabo y espejo" width="1047" height="1400" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b1-rangements_2.webp" data-alt="Dormitorio: estantes de almacenaje, espejo y tabla de planchar" aria-label="Ampliar foto: Almacenaje">
+              <img src="b1-rangements_2.webp" alt="Dormitorio: estantes de almacenaje, espejo y tabla de planchar" width="1400" height="1054" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b1-terrasse-table_2.webp" data-alt="Mesa y sillas en la terraza, frente al jardín" aria-label="Ampliar foto: Comidas al aire libre">
+              <img src="b1-terrasse-table_2.webp" alt="Mesa y sillas en la terraza, frente al jardín" width="1400" height="1054" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b1-transats_2.webp" data-alt="Dos tumbonas en la terraza" aria-label="Ampliar foto: Tumbonas">
+              <img src="b1-transats_2.webp" alt="Dos tumbonas en la terraza" width="1400" height="1054" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b1-entree_2.webp" data-alt="Entrada del bungalow, lado del patio" aria-label="Ampliar foto: Entrada">
+              <img src="b1-entree_2.webp" alt="Entrada del bungalow, lado del patio" width="1400" height="1054" loading="lazy">
+            </button>
+          </div>
+          <p style="margin: 8px 0 0; font-size: 12px; color: rgba(32,31,29,0.6);">10 fotos — haga clic para ampliar.</p>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+          <h3 style="font-size: 25px; margin: 0;">Cocotier</h3>
+          <span class="tag tag-outline">1 dormitorio independiente</span>
+        </div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(32,31,29,0.8);">Un dormitorio con aire acondicionado, un salón, una cocina independiente totalmente equipada, cuarto de baño, terraza cubierta y su jardín privado. Ideal para una pareja o una familia pequeña.</p>
+        <hr class="hr" style="margin: 2px 0;">
+        <ul style="list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; font-size: 14px;">
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Dormitorio con aire acondicionado y cama doble de 160</li>
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Salón con sofá cama</li>
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Cocina independiente y equipada</li>
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Cuarto de baño privado</li>
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Terraza con ducha exterior</li>
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Jardín privado</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary btn-block" style="margin-top: auto;">Solicitar este alojamiento</a>
+      </article>
+
+      <article style="display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 16px; background: var(--color-bg);">
+        <div class="gallery" data-gallery="b2">
+          <button type="button" class="gal-btn gal-main" data-full="b2-studio.webp" data-alt="Estancia principal del estudio con cama doble, sofá cama verde y pared amarilla con un gran cuadro" aria-label="Ampliar foto: Estancia principal">
+            <img src="b2-studio.webp" alt="Estancia principal del estudio con cama doble, sofá cama verde y pared amarilla con un gran cuadro" width="1400" height="1047">
+          </button>
+          <div class="gal-grid">
+            <button type="button" class="gal-btn gal-thumb" data-full="b2-coin-cuisine.webp" data-alt="Rincón de cocina abierto con barra, dos taburetes, lavadora y nevera" aria-label="Ampliar foto: Rincón de cocina">
+              <img src="b2-coin-cuisine.webp" alt="Rincón de cocina abierto con barra, dos taburetes, lavadora y nevera" width="1400" height="1047" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b2-douche.webp" data-alt="Cuarto de baño con ducha en esquina, inodoro y escalera de bambú para las toallas" aria-label="Ampliar foto: Ducha">
+              <img src="b2-douche.webp" alt="Cuarto de baño con ducha en esquina, inodoro y escalera de bambú para las toallas" width="1047" height="1400" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b2-lavabo.webp" data-alt="Cuarto de baño: mueble de lavabo blanco con espejo y estante de bambú" aria-label="Ampliar foto: Lavabo">
+              <img src="b2-lavabo.webp" alt="Cuarto de baño: mueble de lavabo blanco con espejo y estante de bambú" width="1047" height="1400" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b2-jardin.webp" data-alt="Mesa y sillas en la terraza, frente al jardín arbolado" aria-label="Ampliar foto: Terraza y jardín">
+              <img src="b2-jardin.webp" alt="Mesa y sillas en la terraza, frente al jardín arbolado" width="1400" height="1047" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b2-terrasse-marbre.webp" data-alt="Terraza embaldosada con mesa y sillas plegables, frente a las puertas acristaladas del estudio" aria-label="Ampliar foto: Terraza">
+              <img src="b2-terrasse-marbre.webp" alt="Terraza embaldosada con mesa y sillas plegables, frente a las puertas acristaladas del estudio" width="1400" height="1047" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b2-cour.webp" data-alt="Patio de entrada con portón azul de madera y maceta" aria-label="Ampliar foto: Entrada">
+              <img src="b2-cour.webp" alt="Patio de entrada con portón azul de madera y maceta" width="1400" height="1047" loading="lazy">
+            </button>
+          </div>
+          <p style="margin: 8px 0 0; font-size: 12px; color: rgba(32,31,29,0.6);">7 fotos — haga clic para ampliar.</p>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+          <h3 style="font-size: 25px; margin: 0;">Bananier</h3>
+          <span class="tag tag-outline">Estudio</span>
+        </div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(32,31,29,0.8);">Estudio amplio, totalmente climatizado, con su terraza y su jardín privado. Perfecto para 1 o 2 personas.</p>
+        <hr class="hr" style="margin: 2px 0;">
+        <ul style="list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; font-size: 14px;">
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Habitación única con aire acondicionado, cama de 160 y sofá cama</li>
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Rincón de cocina equipado</li>
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Cuarto de baño privado</li>
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Terraza y jardín privados</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary btn-block" style="margin-top: auto;">Solicitar este alojamiento</a>
+      </article>
+
+      <article style="display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 16px; background: var(--color-bg);">
+        <div class="gallery" data-gallery="b3">
+          <button type="button" class="gal-btn gal-main" data-full="b3-terrasse-spa.webp" data-alt="Terraza cubierta con mesa, sillas y spa hinchable" aria-label="Ampliar foto: Terraza">
+            <img src="b3-terrasse-spa.webp" alt="Terraza cubierta con mesa, sillas y spa hinchable" width="1400" height="1047">
+          </button>
+          <div class="gal-grid gal-grid-4">
+            <button type="button" class="gal-btn gal-thumb" data-full="b3-chambre.webp" data-alt="Dormitorio con cama doble y gran armario cerrado con una cortina" aria-label="Ampliar foto: Dormitorio">
+              <img src="b3-chambre.webp" alt="Dormitorio con cama doble y gran armario cerrado con una cortina" width="1400" height="1047" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b3-salon.webp" data-alt="Salón con sofá, mesa redonda y puerta acristalada que da a la terraza" aria-label="Ampliar foto: Salón">
+              <img src="b3-salon.webp" alt="Salón con sofá, mesa redonda y puerta acristalada que da a la terraza" width="1400" height="1047" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b3-repas.webp" data-alt="Zona de comedor con mesa redonda y dos sillas bajo un espejo de madera de deriva" aria-label="Ampliar foto: Zona de comedor">
+              <img src="b3-repas.webp" alt="Zona de comedor con mesa redonda y dos sillas bajo un espejo de madera de deriva" width="1047" height="1400" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="b3-jardin-pergola.webp" data-alt="Pérgola, entrada y jardín del alojamiento" aria-label="Ampliar foto: Jardín">
+              <img src="b3-jardin-pergola.webp" alt="Pérgola, entrada y jardín del alojamiento" width="1400" height="1047" loading="lazy">
+            </button>
+          </div>
+          <p style="margin: 8px 0 0; font-size: 12px; color: rgba(32,31,29,0.6);">5 fotos — haga clic para ampliar.</p>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+          <h3 style="font-size: 25px; margin: 0;">Manguier</h3>
+          <span class="tag tag-outline">1 dormitorio independiente</span>
+        </div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(32,31,29,0.8);">Un dormitorio con aire acondicionado, un salón con cocina equipada, cuarto de baño, terraza y jardín privados. Ideal para una pareja o una familia pequeña.</p>
+        <hr class="hr" style="margin: 2px 0;">
+        <ul style="list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; font-size: 14px;">
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Dormitorio con aire acondicionado y cama doble de 160</li>
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Salón con cocina equipada</li>
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Cuarto de baño privado</li>
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Terraza y jardín privados</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary btn-block" style="margin-top: auto;">Solicitar este alojamiento</a>
+      </article>
+
+      <article style="display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 16px; background: var(--color-bg);">
+        <div class="gallery" data-gallery="k">
+            <button type="button" class="gal-btn gal-main" data-full="piscine.jpeg" data-alt="Piscina elevada de madera rodeada de vegetación" aria-label="Ampliar foto: Piscina">
+              <img src="piscine.jpeg" alt="Piscina elevada de madera rodeada de vegetación" width="1600" height="1204">
+            </button>
+          <div class="gal-grid">
+          <button type="button" class="gal-btn gal-thumb" data-full="terrasse%202.jpeg" data-alt="Terraza embaldosada con mesa y sillas de teca, abierta al salón" aria-label="Ampliar foto: Terraza">
+            <img src="terrasse%202.jpeg" alt="Terraza embaldosada con mesa y sillas de teca, abierta al salón" width="1600" height="1204" loading="lazy">
+          </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="Facade.jpeg" data-alt="Fachada de la casa de dos plantas, terraza bajo toldo y césped" aria-label="Ampliar foto: Fachada">
+              <img src="Facade.jpeg" alt="Fachada de la casa de dos plantas, terraza bajo toldo y césped" width="957" height="1280" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="jardin.jpeg" data-alt="Dos tumbonas en el jardín entre palmeras" aria-label="Ampliar foto: Tumbonas">
+              <img src="jardin.jpeg" alt="Dos tumbonas en el jardín entre palmeras" width="1280" height="957" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="salon%202.jpeg" data-alt="Salón abierto con sillones de colores, cocina y puerta cristalera a la terraza" aria-label="Ampliar foto: Salón">
+              <img src="salon%202.jpeg" alt="Salón abierto con sillones de colores, cocina y puerta cristalera a la terraza" width="1280" height="957" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="salon%203.jpeg" data-alt="Salón con sofá rinconero, televisión y escalera de madera a la planta superior" aria-label="Ampliar foto: Salón">
+              <img src="salon%203.jpeg" alt="Salón con sofá rinconero, televisión y escalera de madera a la planta superior" width="957" height="1280" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="cuisine%202.jpeg" data-alt="Cocina equipada en L con horno, placa, nevera y salpicadero de baldosas hidráulicas" aria-label="Ampliar foto: Cocina">
+              <img src="cuisine%202.jpeg" alt="Cocina equipada en L con horno, placa, nevera y salpicadero de baldosas hidráulicas" width="1600" height="1204" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="chambre%20jaune%202.jpeg" data-alt="Dormitorio en la planta superior con cama de matrimonio amarilla bajo vigas vistas" aria-label="Ampliar foto: Dormitorio 1">
+              <img src="chambre%20jaune%202.jpeg" alt="Dormitorio en la planta superior con cama de matrimonio amarilla bajo vigas vistas" width="960" height="1280" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="chambre%20double.jpeg" data-alt="Dormitorio en la planta superior con dos camas individuales y mesita de noche antigua" aria-label="Ampliar foto: Dormitorio 2">
+              <img src="chambre%20double.jpeg" alt="Dormitorio en la planta superior con dos camas individuales y mesita de noche antigua" width="1280" height="960" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="chambre%20bleue.jpeg" data-alt="Dormitorio con aire acondicionado y gran armario de madera reciclada" aria-label="Ampliar foto: Dormitorio 3">
+              <img src="chambre%20bleue.jpeg" alt="Dormitorio con aire acondicionado y gran armario de madera reciclada" width="960" height="1280" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="couloir%201er.jpeg" data-alt="Pasillo de la planta superior con estante de madera y cuadros" aria-label="Ampliar foto: Pasillo">
+              <img src="couloir%201er.jpeg" alt="Pasillo de la planta superior con estante de madera y cuadros" width="1200" height="1600" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="salle%20de%20bain%20rdc.jpeg" data-alt="Cuarto de baño con lavabo de piedra, inodoro y lavadora" aria-label="Ampliar foto: Cuarto de baño">
+              <img src="salle%20de%20bain%20rdc.jpeg" alt="Cuarto de baño con lavabo de piedra, inodoro y lavadora" width="960" height="1280" loading="lazy">
+            </button>
+            <button type="button" class="gal-btn gal-thumb" data-full="salle%20d%27eau%201er.jpeg" data-alt="Cuarto de ducha con lavabo de piedra sobre mueble de teca, espejo redondo e inodoro" aria-label="Ampliar foto: Cuarto de ducha">
+              <img src="salle%20d%27eau%201er.jpeg" alt="Cuarto de ducha con lavabo de piedra sobre mueble de teca, espejo redondo e inodoro" width="960" height="1280" loading="lazy">
+            </button>
+          </div>
+          <p style="margin: 8px 0 0; font-size: 12px; color: rgba(32,31,29,0.6);">13 fotos — haga clic para ampliar.</p>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+          <h3 style="font-size: 25px; margin: 0;">Les multipliants</h3>
+          <span class="tag tag-outline">Casa · 3 dormitorios</span>
+        </div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(32,31,29,0.8);">Una casa totalmente equipada de dos plantas: salón, cocina y cuarto de baño en la planta baja; tres dormitorios con aire acondicionado y cuarto de ducha con inodoro en la planta superior. Terraza, jardín privado y piscina.</p>
+        <hr class="hr" style="margin: 2px 0;">
+        <ul style="list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; font-size: 14px;">
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Planta baja: salón, cocina y cuarto de baño</li>
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Planta superior: 3 dormitorios con aire acondicionado y cuarto de ducha con inodoro</li>
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Terraza y jardín privados</li>
+          <li style="display: flex; gap: 9px; align-items: baseline;"><span style="color: var(--color-accent-700);">·</span>Piscina</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary btn-block" style="margin-top: auto;">Solicitar este alojamiento</a>
+      </article>
+
+    </div>
+  </div>
+  </section>
+
+  <section id="emplacement" style="max-width: 1120px; margin: 0 auto; padding: clamp(48px, 7vw, 88px) clamp(20px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(28px, 5vw, 64px); align-items: center;" class="stack-mobile">
+    <div>
+      <span style="display: block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent-700);">L'emplacement</span>
+      <h2 style="font-family: var(--font-heading); font-weight: 500; font-size: clamp(30px, 4vw, 44px); line-height: 1.12; margin: 14px 0 0;">El barrio de L'Autre Bord, entre la playa y el puerto</h2>
+      <p style="font-size: 16px; line-height: 1.7; margin: 20px 0 0; color: rgba(32,31,29,0.8); text-align: justify; hyphens: auto;">
+        Los alojamientos se encuentran en L'Autre Bord, en el municipio de Le Moule, en el corazón del parque deportivo de L'Autre Bord. A la playa se llega a pie en dos minutos; el puerto pesquero, donde se compra el pescado del día, está justo al lado. El centro y sus tiendas están a pocos minutos, para disfrutar de la estancia sin depender del coche.
+      </p>
+      <ul style="list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 12px; font-size: 15px;">
+        <li style="display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--color-divider); padding-bottom: 10px;"><span>Playa de L'Autre Bord</span><span style="color: var(--color-accent-700);">100 m</span></li>
+        <li style="display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--color-divider); padding-bottom: 10px;"><span>Puerto pesquero</span><span style="color: var(--color-accent-700);">50 m</span></li>
+        <li style="display: flex; justify-content: space-between; gap: 16px;"><span>Centro y tiendas</span><span style="color: var(--color-accent-700);">500 m</span></li>
+      </ul>
+    </div>
+    <figure style="margin: 0;">
+      <div style="position: relative; border: 1px solid var(--color-divider); border-radius: var(--radius-md); background: var(--color-neutral-100); aspect-ratio: 4 / 3; overflow: hidden;">
+        <div style="position: absolute; inset: 0 0 38% 0; background: var(--color-accent-100); border-bottom: 1px solid var(--color-accent-400);"></div>
+        <span style="position: absolute; top: 14px; left: 18px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-accent-700);">Océano Atlántico</span>
+        <span style="position: absolute; bottom: 14px; left: 18px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(32,31,29,0.55);">Le Moule — L'Autre Bord</span>
+        <div style="position: absolute; top: 58%; left: 22%; width: 12px; height: 12px; border: 1.5px solid var(--color-accent-700); border-radius: 50%; background: var(--color-accent-300);"></div>
+        <span style="position: absolute; top: 55%; left: calc(22% + 22px); font-family: var(--font-heading); font-size: 15px;">Los alojamientos</span>
+        <div style="position: absolute; top: 58%; left: calc(22% + 6px); width: 1px; height: 12%; background: var(--color-accent-700);"></div>
+        <span style="position: absolute; top: 70%; left: calc(22% + 14px); font-size: 11.5px; color: rgba(32,31,29,0.7);">100 m</span>
+        <div style="position: absolute; top: 72%; left: 8%; right: 42%; height: 1px; background: var(--color-divider);"></div>
+        <span style="position: absolute; top: 74%; left: 8%; font-size: 12px;">Playa</span>
+        <div style="position: absolute; top: 34%; right: 16%; width: 10px; height: 10px; border: 1.5px solid var(--color-neutral-700);"></div>
+        <span style="position: absolute; top: 31%; right: calc(16% + 20px); font-size: 12px;">Puerto pesquero</span>
+        <div style="position: absolute; bottom: 12%; right: 14%; width: 10px; height: 10px; border: 1.5px solid var(--color-neutral-700); border-radius: 2px;"></div>
+        <span style="position: absolute; bottom: 10%; right: calc(14% + 20px); font-size: 12px;">Centro</span>
+      </div>
+      <figcaption style="margin-top: 8px; font-size: 11px; color: rgba(32,31,29,0.55);">Esquema orientativo — las distancias son aproximadas.</figcaption>
+    </figure>
+  </section>
+
+  <section id="tarifs" style="background: var(--color-accent-100); border-top: 1px solid var(--color-accent-400); border-bottom: 1px solid var(--color-accent-400);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: clamp(40px, 6vw, 72px) clamp(20px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(24px, 4vw, 56px); align-items: end;">
+      <div>
+        <span style="display: block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent-700);">Disponibilidad y tarifas</span>
+        <h2 style="font-family: var(--font-heading); font-weight: 500; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.14; margin: 14px 0 0; max-width: 26ch;">Tarifas bajo petición</h2>
+        <p style="font-size: 16px; line-height: 1.7; margin: 16px 0 0; max-width: 52ch; color: rgba(32,31,29,0.8);">Escríbanos con sus fechas de estancia y el número de viajeros: le responderemos con la disponibilidad y la tarifa correspondiente al periodo.</p>
+      </div>
+      <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+        <a href="#contact" class="btn btn-primary">Contáctenos con sus fechas</a>
+        <a href="mailto:contact@tortuemarine.com" class="btn btn-ghost">contact@tortuemarine.com</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="max-width: 1120px; margin: 0 auto; padding: clamp(48px, 7vw, 88px) clamp(20px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: clamp(28px, 5vw, 64px);">
+    <div>
+      <span style="display: block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent-700);">Contacto y reserva</span>
+      <h2 style="font-family: var(--font-heading); font-weight: 500; font-size: clamp(30px, 4vw, 44px); line-height: 1.12; margin: 14px 0 0;">Hablemos de su estancia</h2>
+      <p style="font-size: 16px; line-height: 1.7; margin: 18px 0 0; max-width: 46ch; color: rgba(32,31,29,0.8);">Díganos sus fechas, el número de personas y el alojamiento que le interesa. Le respondemos rápidamente, en francés, inglés o español.</p>
+      <p style="font-size: 15px; margin: 22px 0 0;">Por e-mail: <a href="mailto:contact@tortuemarine.com">contact@tortuemarine.com</a></p>
+      <figure class="plate" style="margin: 28px 0 0; width: 100%; height: 240px;">
+        <img src="carbet.webp" alt="Cenador en la playa, a la sombra de los árboles, frente al mar" width="530" height="354" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 55%;">
+      </figure>
+    </div>
+    <div id="tm-form-wrap">
+      <form id="contact-form" style="display: grid; gap: 16px; align-content: start; border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: clamp(18px, 3vw, 28px);">
+        <div class="field">
+          <label for="tm-nom">Su nombre</label>
+          <input class="input" id="tm-nom" name="nom" type="text" placeholder="Nombre y apellidos" required>
+        </div>
+        <div class="field">
+          <label for="tm-email">Su e-mail</label>
+          <input class="input" id="tm-email" name="email" type="email" placeholder="usted@ejemplo.com" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="tm-tel">Teléfono (opcional)</label>
+          <input class="input" id="tm-tel" name="telephone" type="tel" placeholder="+34 000 00 00 00" autocomplete="tel">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="field">
+            <label for="tm-arrivee">Llegada</label>
+            <input class="input" id="tm-arrivee" name="arrivee" type="date">
+          </div>
+          <div class="field">
+            <label for="tm-depart">Salida</label>
+            <input class="input" id="tm-depart" name="depart" type="date">
+          </div>
+        </div>
+        <div class="field">
+          <label for="tm-logement">Alojamiento deseado</label>
+          <select class="input" id="tm-logement" name="logement">
+            <option>Indiferente / a aconsejar</option>
+            <option>Cocotier — 1 dormitorio</option>
+            <option>Bananier — estudio</option>
+            <option>Manguier — 1 dormitorio</option>
+            <option>Les multipliants — casa de 3 dormitorios</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="tm-message">Su mensaje</label>
+          <textarea class="input" id="tm-message" name="message" rows="4" placeholder="Número de viajeros, preguntas, aclaraciones…" style="resize: vertical;"></textarea>
+        </div>
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position: absolute; left: -9999px; width: 1px; height: 1px;" aria-hidden="true">
+        <button type="submit" id="tm-submit" class="btn btn-primary btn-block">Enviar mi solicitud</button>
+        <p id="tm-error" role="alert" style="display: none; margin: 0; font-size: 14px; line-height: 1.6; color: #9b1c1c;"></p>
+        <p style="margin: 0; font-size: 12px; line-height: 1.6; color: rgba(32,31,29,0.65);">Sus datos solo se utilizan para responder a su solicitud de estancia.</p>
+      </form>
+    </div>
+    <div id="contact-success" style="display: none; border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: clamp(18px, 3vw, 28px);">
+      <h3 id="tm-success-title" style="font-size: 20px; margin-bottom: 10px;">Gracias, su solicitud ha sido enviada</h3>
+      <p id="tm-success-text" style="font-size: 15px; line-height: 1.6; color: rgba(32,31,29,0.8);">Le respondemos rápidamente, en francés, inglés o español.</p>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid var(--color-divider); background: var(--color-bg);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: clamp(28px, 4vw, 44px) clamp(20px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; font-size: 13px; line-height: 1.7; color: rgba(32,31,29,0.72);">
+      <div>
+        <div style="font-family: var(--font-heading); font-weight: 700; font-size: 18px; color: var(--color-text);">Tortue Marine</div>
+        <p style="margin: 6px 0 0;">Alquiler de alojamientos amueblados<br>L'Autre Bord, Le Moule — Guadalupe</p>
+      </div>
+      <div>
+        <p style="margin: 0;">Contacto<br><a href="mailto:contact@tortuemarine.com">contact@tortuemarine.com</a></p>
+      </div>
+      <div>
+        <p style="margin: 0;">Alquiler de temporada de alojamientos turísticos amueblados. Tarifas y disponibilidad bajo petición.</p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Fotos del alojamiento" hidden>
+  <button type="button" class="lb-btn lb-close" aria-label="Cerrar">×</button>
+  <button type="button" class="lb-btn lb-prev" aria-label="Foto anterior">‹</button>
+  <figure><img id="lb-img" src="" alt=""><figcaption id="lb-cap"></figcaption></figure>
+  <button type="button" class="lb-btn lb-next" aria-label="Foto siguiente">›</button>
+</div>
+<script>
+// Envoi du formulaire via Web3Forms (service gratuit, sans serveur à gérer).
+// La clé d'accès n'est pas secrète : elle ne permet que d'envoyer vers l'adresse
+// associée à la clé. Tant que la clé n'est pas renseignée, repli sur le mailto.
+(function () {
+  const ACCESS_KEY = '97290e9c-bde5-49a6-8403-df49027491fc';
+  const DEST = 'contact@tortuemarine.com';
+  const form = document.getElementById('contact-form');
+  const formWrap = document.getElementById('tm-form-wrap');
+  const success = document.getElementById('contact-success');
+  const btn = document.getElementById('tm-submit');
+  const err = document.getElementById('tm-error');
+  if (!form) return;
+
+  function showSuccess(title, text) {
+    if (title) document.getElementById('tm-success-title').textContent = title;
+    if (text) document.getElementById('tm-success-text').textContent = text;
+    if (formWrap) formWrap.style.display = 'none';
+    if (success) success.style.display = 'block';
+  }
+
+  function mailtoFallback(data) {
+    const g = (n) => data.get(n) || '—';
+    const lines = [
+      'Nombre: ' + g('nom'),
+      'E-mail: ' + g('email'),
+      'Teléfono: ' + g('telephone'),
+      'Llegada: ' + g('arrivee'),
+      'Salida: ' + g('depart'),
+      'Alojamiento deseado: ' + g('logement'),
+      '',
+      data.get('message') || ''
+    ];
+    window.location.href = 'mailto:' + DEST + '?subject=' + encodeURIComponent('Solicitud de estancia — Tortue Marine') + '&body=' + encodeURIComponent(lines.join('\n'));
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const data = new FormData(form);
+    if (err) err.style.display = 'none';
+    if (data.get('botcheck')) return; // anti-spam : champ piège rempli par un robot
+
+    if (!ACCESS_KEY) {
+      mailtoFallback(data);
+      showSuccess('Se abre su programa de correo', 'Se ha abierto un mensaje rellenado en su programa de correo. Solo tiene que enviarlo.');
+      return;
+    }
+
+    const payload = {
+      access_key: ACCESS_KEY,
+      subject: 'Solicitud de estancia — Tortue Marine',
+      from_name: 'Site Tortue Marine',
+      name: data.get('nom'),
+      email: data.get('email'),
+      telephone: data.get('telephone') || '—',
+      arrivee: data.get('arrivee') || '—',
+      depart: data.get('depart') || '—',
+      logement: data.get('logement'),
+      message: data.get('message') || '—',
+      langue: 'es'
+    };
+    if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const out = await res.json();
+      if (res.ok && out.success) {
+        showSuccess();
+      } else {
+        throw new Error(out.message || 'Erreur');
+      }
+    } catch (ex) {
+      if (btn) { btn.disabled = false; btn.textContent = 'Enviar mi solicitud'; }
+      if (err) {
+        err.textContent = 'El envío ha fallado. Inténtelo de nuevo o escríbanos directamente a ' + DEST + '.';
+        err.style.display = 'block';
+      }
+    }
+  });
+})();
+
+// Liens e-mail : l'adresse est aussi copiée dans le presse-papiers, car le clic
+// n'ouvre rien si le visiteur n'a pas de logiciel de messagerie configuré.
+(function () {
+  const toast = document.createElement('div');
+  toast.className = 'tm-toast';
+  toast.setAttribute('role', 'status');
+  document.body.appendChild(toast);
+  let timer;
+  function show(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(timer);
+    timer = setTimeout(function () { toast.classList.remove('show'); }, 3500);
+  }
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      const addr = a.getAttribute('href').replace('mailto:', '').split('?')[0];
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(addr).then(
+          function () { show('Dirección copiada: ' + addr); },
+          function () { show('Nuestra dirección: ' + addr); }
+        );
+      } else {
+        show('Nuestra dirección: ' + addr);
+      }
+    });
+  });
+})();
+
+// Galerie : agrandissement des photos avec navigation (flèches, Échap)
+(function () {
+  const box = document.getElementById('lightbox');
+  if (!box) return;
+  const img = document.getElementById('lb-img');
+  const cap = document.getElementById('lb-cap');
+  let items = [], idx = 0, opener = null;
+
+  function show(i) {
+    idx = (i + items.length) % items.length;
+    img.src = items[idx].dataset.full;
+    img.alt = items[idx].dataset.alt;
+    cap.textContent = items[idx].dataset.alt + '  (' + (idx + 1) + '/' + items.length + ')';
+  }
+  function open(group, btn) {
+    items = Array.from(group.querySelectorAll('.gal-btn'));
+    opener = btn;
+    box.hidden = false;
+    box.classList.add('open');
+    show(items.indexOf(btn));
+    box.querySelector('.lb-close').focus();
+  }
+  function close() {
+    box.classList.remove('open');
+    box.hidden = true;
+    img.src = '';
+    if (opener) opener.focus();
+  }
+  document.querySelectorAll('[data-gallery]').forEach(function (g) {
+    g.addEventListener('click', function (e) {
+      const b = e.target.closest('.gal-btn');
+      if (b) open(g, b);
+    });
+  });
+  box.querySelector('.lb-close').addEventListener('click', close);
+  box.querySelector('.lb-prev').addEventListener('click', function () { show(idx - 1); });
+  box.querySelector('.lb-next').addEventListener('click', function () { show(idx + 1); });
+  box.addEventListener('click', function (e) { if (e.target === box) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!box.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') show(idx - 1);
+    else if (e.key === 'ArrowRight') show(idx + 1);
+  });
+})();
+</script>
+</body>
+</html>
